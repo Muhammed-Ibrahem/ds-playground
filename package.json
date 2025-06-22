@@ -1,0 +1,32 @@
+{
+  "name": "ds-typescript-jest",
+  "version": "1.0.0",
+  "description": "A personal project to implement data structures using TypeScript and test them with Jest.",
+  "main": "dist/index.js",
+  "keywords": [
+    "data-structures",
+    "typescript",
+    "jest",
+    "learning",
+    "algorithms"
+  ],
+  "author": "Muhammed Ibrahem",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "ts-node src/index.ts",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.27.4",
+    "@babel/preset-env": "^7.27.2",
+    "@babel/preset-typescript": "^7.27.1",
+    "@jest/globals": "^30.0.2",
+    "@types/jest": "^30.0.0",
+    "babel-jest": "^30.0.2",
+    "jest": "^30.0.2",
+    "ts-jest": "^29.4.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  }
+}
