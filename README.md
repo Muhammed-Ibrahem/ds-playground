@@ -12,8 +12,8 @@ The goal is to build a strong foundation in **data structures and algorithms** w
 | ------------------------- | ------------ | --------------------------------------------------------------------------- |
 | Linked List               | ✅ Completed | Singly linked list with basic insert, delete, and search operations         |
 | Doubly Linked List        | ✅ Completed | Each node points to both the next and previous node for efficient traversal |
-| Stack (Linked List-based) | 🔜 Upcoming  | LIFO stack implementation using a linked list internally                    |
-| Stack (Array-based)       | 🔜 Upcoming  | LIFO structure implemented using a dynamic array                            |
+| Stack (Linked List-based) | ✅ Completed | LIFO stack implementation using a linked list internally                    |
+| Stack (Array-based)       | ✅ Completed | LIFO structure implemented using a dynamic array                            |
 | Queue (Array or LL)       | 🔜 Upcoming  | FIFO queue structure using either array or linked list                      |
 | Binary Tree               | 🔜 Upcoming  | Hierarchical structure with nodes having at most two children               |
 | Binary Search Tree        | 🔜 Upcoming  | A binary tree where left < root < right; supports efficient search/insert   |
