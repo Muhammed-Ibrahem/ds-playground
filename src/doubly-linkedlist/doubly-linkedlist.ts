@@ -119,6 +119,19 @@ export class DoublyLinkedList<T> {
 
     this.#length++;
   }
+
+  deleteHead(): void {
+    if (this.#length === 0) return;
+
+    if (this.head === this.tail) {
+      this.head = null;
+      this.tail = null;
+    } else {
+      this.head = this.head!.next;
+      this.head!.back = null;
+    }
+    this.#length--;
+  }
   get size() {
     return this.#length;
   }
