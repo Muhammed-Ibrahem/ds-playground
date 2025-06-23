@@ -30,6 +30,21 @@ export class DoublyLinkedList<T> {
     this.#length++;
   }
 
+  insertFirst(_data: T): void {
+    const newNode = new DoublyListNode<T>(_data);
+
+    if (this.head === null) {
+      this.head = newNode;
+      this.tail = newNode;
+    } else {
+      newNode.next = this.head;
+      this.head.back = newNode;
+      this.head = newNode;
+    }
+
+    this.#length++;
+  }
+
   get size() {
     return this.#length;
   }
