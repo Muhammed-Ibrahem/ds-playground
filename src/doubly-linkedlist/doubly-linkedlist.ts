@@ -98,6 +98,27 @@ export class DoublyLinkedList<T> {
     this.#length++;
   }
 
+  insertBefore(_data: T, callbackFn: (passedData: T) => boolean): void {
+    if (this.#length === 0) return;
+    const node = this.#findNode(callbackFn);
+
+    if (!node) return;
+
+    const newNode = new DoublyListNode<T>(_data);
+
+    newNode.next = node;
+
+    if (node === this.head) {
+      node.back = newNode;
+      this.head = newNode;
+    } else {
+      newNode.back = node.back;
+      node.back!.next = newNode;
+      node.back = newNode;
+    }
+
+    this.#length++;
+  }
   get size() {
     return this.#length;
   }

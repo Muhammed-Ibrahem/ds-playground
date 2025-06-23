@@ -95,5 +95,43 @@ describe("Doubly Linked List", () => {
         expect(dls.tail!.data).toBe(3);
       });
     });
+    describe("insertBefore", () => {
+      it("should not insert if list is empty", () => {
+        const dls = new DoublyLinkedList<number>();
+        dls.insertBefore(0, (data) => data === 0);
+
+        expect(dls.size).toBe(0);
+        expect(dls.head).toBeNull();
+        expect(dls.tail).toBeNull();
+      });
+      it("should not insert if specified node does not exist", () => {
+        const dls = new DoublyLinkedList<number>(1, 2);
+
+        dls.insertBefore(3, (data) => data === 3);
+
+        expect(dls.size).toBe(2);
+      });
+      it("should insert node before head and make head point at that new node", () => {
+        const dls = new DoublyLinkedList<number>(1);
+
+        dls.insertBefore(0, (data) => data === 1);
+
+        expect(dls.head!.data).toBe(0);
+        expect(dls.tail!.data).toBe(1);
+        expect(dls.size).toBe(2);
+      });
+      it("should insert node between two existing nodes", () => {
+        const dls = new DoublyLinkedList<number>(1, 3);
+
+        dls.insertBefore(2, (data) => data === 3);
+
+        expect(dls.head!.data).toBe(1);
+        expect(dls.tail!.data).toBe(3);
+        expect(dls.head!.next!.data).toBe(2);
+        expect(dls.head!.next).toBe(dls.tail!.back);
+        expect(dls.head!.next!.back).toBe(dls.head);
+        expect(dls.size).toBe(3);
+      });
+    });
   });
 });
