@@ -203,5 +203,62 @@ describe("Doubly Linked List", () => {
         expect(dls.size).toBe(2);
       });
     });
+
+    describe("deleteNode", () => {
+      it("should do nothing if empty list", () => {
+        const dls = new DoublyLinkedList<number>();
+        dls.deleteNode((data) => data === 1);
+
+        expect(dls.size).toBe(0);
+        expect(dls.head).toBeNull();
+        expect(dls.tail).toBeNull();
+      });
+      it("should do nothing if specified node doesn't exist", () => {
+        const dls = new DoublyLinkedList<number>(1, 2);
+        dls.deleteNode((data) => data === 3);
+
+        expect(dls.size).toBe(2);
+        expect(dls.head!.next).toBe(dls.tail);
+        expect(dls.tail!.back).toBe(dls.head);
+      });
+      it("should delete head & tail and make both null", () => {
+        const dls = new DoublyLinkedList<number>(1);
+
+        dls.deleteNode((data) => data === 1);
+
+        expect(dls.size).toBe(0);
+        expect(dls.head).toBeNull();
+        expect(dls.tail).toBeNull();
+      });
+      it("should delete head and move head pointer forward", () => {
+        const dls = new DoublyLinkedList<number>(1, 2);
+
+        dls.deleteNode((data) => data === 1);
+
+        expect(dls.size).toBe(1);
+        expect(dls.head).toBe(dls.tail);
+        expect(dls.head!.back).toBeNull();
+        expect(dls.head!.data).toBe(2);
+      });
+      it("should delete tail and move tail pointer backward", () => {
+        const dls = new DoublyLinkedList<number>(1, 2);
+
+        dls.deleteNode((data) => data === 2);
+
+        expect(dls.size).toBe(1);
+        expect(dls.head).toBe(dls.tail);
+        expect(dls.head!.data).toBe(1);
+        expect(dls.tail!.next).toBeNull();
+      });
+      it("should delete the specified node", () => {
+        const dls = new DoublyLinkedList<number>(1, 3, 5);
+
+        dls.deleteNode((data) => data === 3);
+
+        expect(dls.size).toBe(2);
+        expect(dls.head!.next).toBe(dls.tail);
+        expect(dls.tail!.back).toBe(dls.head);
+      });
+    });
   });
 });

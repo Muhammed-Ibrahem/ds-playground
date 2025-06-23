@@ -145,6 +145,22 @@ export class DoublyLinkedList<T> {
 
     this.#length--;
   }
+  deleteNode(callbackFn: (passedData: T) => boolean): void {
+    if (this.#length === 0) return;
+
+    let node = this.#findNode(callbackFn);
+
+    if (!node) return;
+
+    if (node === this.head) return this.deleteHead();
+    if (node === this.tail) return this.deleteTail();
+
+    node.back!.next = node.next;
+    node.next!.back = node.back;
+
+    node = null;
+    this.#length--;
+  }
   get size() {
     return this.#length;
   }
