@@ -2,6 +2,22 @@ import { DoublyLinkedList } from "./doubly-linkedlist";
 
 describe("Doubly Linked List", () => {
   describe("Insertion", () => {
+    describe("Instanciation", () => {
+      it("should create an empty d-linked-list", () => {
+        const dls = new DoublyLinkedList<number>();
+
+        expect(dls.size).toBe(0);
+        expect(dls.head).toBeNull();
+        expect(dls.tail).toBeNull();
+      });
+      it("should create a d-linked-list with the provided values", () => {
+        const dls = new DoublyLinkedList<number>(1, 2, 3, 4);
+
+        expect(dls.size).toBe(4);
+        expect(dls.head!.data).toBe(1);
+        expect(dls.tail!.data).toBe(4);
+      });
+    });
     describe("insertLast", () => {
       it("should insert node and make it head/tail", () => {
         const dls = new DoublyLinkedList<number>();
