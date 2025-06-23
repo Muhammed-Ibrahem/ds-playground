@@ -61,5 +61,39 @@ describe("Doubly Linked List", () => {
         expect(dls.size).toBe(2);
       });
     });
+    describe("insertAfter", () => {
+      it("shouldn't insert anything if list is empty", () => {
+        const dls = new DoublyLinkedList<number>();
+        dls.insertAfter(1, (data) => data === 10);
+
+        expect(dls.size).toBe(0);
+        expect(dls.head).toBeNull();
+        expect(dls.tail).toBeNull();
+      });
+      it("shouldn't insert if specified node doesn't exist", () => {
+        const dls = new DoublyLinkedList<number>(1, 2, 3);
+        dls.insertAfter(10, (data) => data === 9);
+
+        expect(dls.size).toBe(3);
+      });
+      it("should insert node after tail and move tail to point at it", () => {
+        const dls = new DoublyLinkedList<number>(1, 2, 3);
+        dls.insertAfter(4, (data) => data === 3);
+
+        expect(dls.size).toBe(4);
+        expect(dls.tail!.data).toBe(4);
+        expect(dls.tail!.back!.data).toBe(3);
+      });
+      it("shoud insert node between two existing node", () => {
+        const dls = new DoublyLinkedList<number>(1, 3);
+        dls.insertAfter(2, (data) => data === 1);
+
+        expect(dls.size).toBe(3);
+        expect(dls.head!.next).toBe(dls.tail!.back);
+        expect(dls.head!.next!.back).toBe(dls.head);
+        expect(dls.head!.next!.next).toBe(dls.tail);
+        expect(dls.tail!.data).toBe(3);
+      });
+    });
   });
 });
