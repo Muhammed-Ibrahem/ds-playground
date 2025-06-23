@@ -132,6 +132,19 @@ export class DoublyLinkedList<T> {
     }
     this.#length--;
   }
+  deleteTail(): void {
+    if (this.#length === 0) return;
+
+    if (this.tail === this.head) {
+      this.tail = null;
+      this.head = null;
+    } else {
+      this.tail = this.tail!.back;
+      this.tail!.next = null;
+    }
+
+    this.#length--;
+  }
   get size() {
     return this.#length;
   }

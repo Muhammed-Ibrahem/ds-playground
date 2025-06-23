@@ -169,5 +169,39 @@ describe("Doubly Linked List", () => {
         expect(dls.size).toBe(2);
       });
     });
+
+    describe("deleteTail", () => {
+      it("should do nothing if no tail | emptyList", () => {
+        const dls = new DoublyLinkedList<number>();
+
+        dls.deleteTail();
+
+        expect(dls.size).toBe(0);
+        expect(dls.head).toBeNull();
+        expect(dls.tail).toBeNull();
+      });
+      it("should delete both head & tail if the list only has 1 node", () => {
+        const dls = new DoublyLinkedList<number>(1);
+
+        dls.deleteTail();
+
+        expect(dls.head).toBeNull();
+        expect(dls.tail).toBeNull();
+        expect(dls.size).toBe(0);
+      });
+      it("should delete tail and point the tail pointer to the previous node", () => {
+        const dls = new DoublyLinkedList<number>(1, 2, 3);
+
+        const oldTail = dls.tail;
+
+        dls.deleteTail();
+
+        expect(dls.tail).not.toBe(oldTail);
+        expect(dls.tail!.data).toBe(2);
+        expect(dls.head!.next).toBe(dls.tail);
+        expect(dls.tail!.next).toBeNull();
+        expect(dls.size).toBe(2);
+      });
+    });
   });
 });
