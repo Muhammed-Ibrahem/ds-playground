@@ -161,6 +161,72 @@ export class DoublyLinkedList<T> {
     node = null;
     this.#length--;
   }
+
+  map<Output>(callbackFn: (passedData: T) => Output): DoublyLinkedList<Output> {
+    const newList = new DoublyLinkedList<Output>();
+    const itr = this.#begin();
+    let node;
+    while ((node = itr.current()) !== null) {
+      newList.insertLast(callbackFn(node.data));
+      itr.next();
+    }
+    return newList;
+  }
+  filter(callbackFn: (passedData: T) => boolean): DoublyLinkedList<T> {
+    const newFilteredList: DoublyLinkedList<T> = new DoublyLinkedList<T>();
+    const itr = this.#begin();
+    let node;
+    while ((node = itr.current()) !== null) {
+      if (callbackFn(node.data)) {
+        newFilteredList.insertLast(node.data);
+      }
+      itr.next();
+    }
+    return newFilteredList;
+  }
+  reduce<Output>(
+    callbackFn: (previousValue: Output, currentValue: T) => Output,
+    initialValue: Output
+  ): Output {
+    let outputValue = initialValue;
+    const itr = this.#begin();
+    let node;
+    while ((node = itr.current()) !== null) {
+      outputValue = callbackFn(outputValue, node.data);
+      itr.next();
+    }
+    return outputValue;
+  }
+  forEach(callbackFn: (passedData: T) => void): void {
+    const itr = this.#begin();
+    let node;
+    while ((node = itr.current()) !== null) {
+      callbackFn(node.data);
+      itr.next();
+    }
+  }
+  some(callbackFn: (passedData: T) => boolean): boolean {
+    const itr = this.#begin();
+    let node;
+    while ((node = itr.current()) !== null) {
+      if (callbackFn(node.data)) {
+        return true;
+      }
+      itr.next();
+    }
+    return false;
+  }
+  every(callbackFn: (passedData: T) => boolean): boolean {
+    const itr = this.#begin();
+    let node;
+    while ((node = itr.current()) !== null) {
+      if (!callbackFn(node.data)) {
+        return false;
+      }
+      itr.next();
+    }
+    return true;
+  }
   get size() {
     return this.#length;
   }

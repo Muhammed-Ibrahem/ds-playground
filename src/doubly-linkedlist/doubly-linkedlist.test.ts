@@ -261,4 +261,78 @@ describe("Doubly Linked List", () => {
       });
     });
   });
+
+  describe("Iterable Methods", () => {
+    describe("map", () => {
+      it("should iterate over list node and return new list with the new shape of values", () => {
+        const dls = new DoublyLinkedList<number>(1, 2, 3, 4, 5);
+
+        const newList = dls.map((data) => `String:${data}`);
+
+        expect(newList.size).toBe(5);
+        expect(typeof newList.head!.data).toBe("string");
+      });
+    });
+    describe("filter", () => {
+      it("should iterate over the lsit and return newly filtered list", () => {
+        const dls = new DoublyLinkedList<number>(1, 2, 3, 4, 5);
+
+        const filteredList = dls.filter((data) => data > 2);
+
+        expect(filteredList.size).toBe(3);
+        expect(filteredList.head!.data).toBe(3);
+      });
+    });
+    describe("reduce", () => {
+      it("should iterate over the list and return the value of the reduction function", () => {
+        const dls = new DoublyLinkedList<number>(1, 2, 3, 4, 5);
+
+        const val = dls.reduce((acc, cur) => acc + cur, 0);
+
+        expect(val).toBe(0 + 1 + 2 + 3 + 4 + 5);
+      });
+    });
+    describe("forEach", () => {
+      it("should iterate over the list passing the data of each node", () => {
+        const dls = new DoublyLinkedList<number>(1, 2, 3, 4, 5);
+        let data;
+
+        dls.forEach((num) => {
+          if (num === 3) {
+            data = num;
+            return;
+          }
+        });
+        expect(data).toBe(3);
+      });
+    });
+    describe("some", () => {
+      it("should iterate over the list returns true if some data pass implemented by provided function", () => {
+        const dls = new DoublyLinkedList<number>(10, 20, 30);
+        const boolVal = dls.some((data) => data / 2 > 5);
+
+        expect(boolVal).toBe(true);
+      });
+      it("should iterate over the list returns false if no data pass implemented by provided function", () => {
+        const dls = new DoublyLinkedList<number>(1, 2, 3);
+        const boolVal = dls.some((data) => data / 2 > 5);
+
+        expect(boolVal).toBe(false);
+      });
+    });
+    describe("every", () => {
+      it("should iterate over the list returns true if all data pass implemented by provided function", () => {
+        const dls = new DoublyLinkedList<number>(10, 20, 30);
+        const boolVal = dls.every((data) => data % 2 === 0);
+
+        expect(boolVal).toBe(true);
+      });
+      it("should iterate over the list returns false if no data pass implemented by provided function", () => {
+        const dls = new DoublyLinkedList<number>(1, 2, 3);
+        const boolVal = dls.every((data) => data % 2 === 0);
+
+        expect(boolVal).toBe(false);
+      });
+    });
+  });
 });
