@@ -8,11 +8,11 @@ class DoublyListNode<T> {
 
 export class DoublyLinkedList<T> {
   #length: number;
-  constructor(
-    public head: DoublyListNode<T> | null = null,
-    public tail: DoublyListNode<T> | null = null
-  ) {
+  public head: DoublyListNode<T> | null = null;
+  public tail: DoublyListNode<T> | null = null;
+  constructor(...args: T[]) {
     this.#length = 0;
+    args.forEach((arg) => this.insertLast(arg));
   }
 
   insertLast(_data: T): void {
